@@ -50,6 +50,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Graphs\Ant.cs" />
+    <Compile Include="Graphs\GraphReaderWriter.cs" />
     <Compile Include="Graphs\MinHamilCycleFinder.cs" />
     <Compile Include="Graphs\Vertex.cs" />
     <Compile Include="Program.cs" />
