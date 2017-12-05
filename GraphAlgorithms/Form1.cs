@@ -17,46 +17,24 @@ namespace GraphAlgorithms
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button_clear_Click(object sender, EventArgs e)
         {
-            MinHamilCycleFinder min = new MinHamilCycleFinder(getAdjacencyMatrix());
-            MessageBox.Show(min.testMethod()[0].ToString());
+            dGV_adjacMatrix.Columns.Clear();
         }
 
-        private int[,] getAdjacencyMatrix()
+        private void button_addVertex_Click(object sender, EventArgs e)
         {
-            int[,] adjcMatrix = new int[6, 6];
-            for (int i = 1; i <= 6; i++)
-            {
-                for (int j = 1; j <=6; j++)
-                {
-                    string tBoxContent = getTextBoxContent(i, j);
-                    if (tBoxContent == "")
-                    {
-                        adjcMatrix[i - 1, j - 1] = -1;
-                        continue;
-                    }
-                    else
-                    {
-                        adjcMatrix[i - 1, j - 1] = int.Parse(tBoxContent);
-                    }                
-                }
-            }
-
-            return adjcMatrix;
+            GraphReaderWriter.addVertex(dGV_adjacMatrix);
         }
 
-        private string getTextBoxContent(int row, int column)
+        private void button_run_Click(object sender, EventArgs e)
         {
-            string text;
-            try
-            {
-                text = ((TextBox)tableLayoutPanel_graph.GetControlFromPosition(column, row)).Text;
-            } catch(Exception e)
-            {
-                text = "";   
-            }
-            return text;
+            GraphReaderWriter.getAdjacancyMatrix(dGV_adjacMatrix);
+        }
+
+        private void button_loadExample_Click(object sender, EventArgs e)
+        {
+            GraphReaderWriter.loadExample(dGV_adjacMatrix);
         }
     }
 }

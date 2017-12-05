@@ -39,9 +39,13 @@
             // 
             // dGV_adjacMatrix
             // 
+            this.dGV_adjacMatrix.AllowUserToAddRows = false;
+            this.dGV_adjacMatrix.AllowUserToDeleteRows = false;
+            this.dGV_adjacMatrix.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dGV_adjacMatrix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGV_adjacMatrix.Location = new System.Drawing.Point(398, 12);
             this.dGV_adjacMatrix.Name = "dGV_adjacMatrix";
+            this.dGV_adjacMatrix.RowHeadersWidth = 60;
             this.dGV_adjacMatrix.Size = new System.Drawing.Size(670, 614);
             this.dGV_adjacMatrix.TabIndex = 0;
             // 
@@ -54,6 +58,7 @@
             this.button_addVertex.TabIndex = 1;
             this.button_addVertex.Text = "Add vertex";
             this.button_addVertex.UseVisualStyleBackColor = true;
+            this.button_addVertex.Click += new System.EventHandler(this.button_addVertex_Click);
             // 
             // button_clear
             // 
@@ -64,6 +69,7 @@
             this.button_clear.TabIndex = 2;
             this.button_clear.Text = "Clear";
             this.button_clear.UseVisualStyleBackColor = true;
+            this.button_clear.Click += new System.EventHandler(this.button_clear_Click);
             // 
             // button_loadExample
             // 
@@ -74,6 +80,7 @@
             this.button_loadExample.TabIndex = 3;
             this.button_loadExample.Text = "Load example";
             this.button_loadExample.UseVisualStyleBackColor = true;
+            this.button_loadExample.Click += new System.EventHandler(this.button_loadExample_Click);
             // 
             // button_run
             // 
@@ -84,6 +91,7 @@
             this.button_run.TabIndex = 4;
             this.button_run.Text = "Run";
             this.button_run.UseVisualStyleBackColor = true;
+            this.button_run.Click += new System.EventHandler(this.button_run_Click);
             // 
             // label1
             // 
