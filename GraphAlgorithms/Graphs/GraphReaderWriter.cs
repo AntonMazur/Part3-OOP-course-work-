@@ -12,15 +12,15 @@ namespace GraphAlgorithms.Graphs
 
         public static void addVertex(DataGridView dGV)
         {
-            addColumnToDGV(dGV, "V" + +(dGV.Columns.Count + 1));
-            addRowToDGV(dGV, "V" + +(dGV.Columns.Count));
-            dGV.Rows[dGV.Rows.Count - 1]
-                .Cells[dGV.Rows.Count - 1].Value = "-";
+            addColumnToDGV(dGV, "V" + +(dGV.ColumnCount + 1));
+            addRowToDGV(dGV, "V" + +(dGV.ColumnCount));
+            dGV.Rows[dGV.RowCount - 1]
+                .Cells[dGV.RowCount - 1].Value = "-";
         }
 
         private static void addColumnToDGV(DataGridView dGV, string header)
         {
-            dGV.Columns.Add("col" + (dGV.Columns.Count + 1), header);
+            dGV.Columns.Add("col" + (dGV.ColumnCount + 1), header);
         }
 
         private static void addRowToDGV(DataGridView dGV, string header)
@@ -33,12 +33,24 @@ namespace GraphAlgorithms.Graphs
         private static void addRowToDGV(DataGridView dGV, string header, params Object[] rowContent)
         {
             dGV.Rows.Add(rowContent);
-            dGV.Rows[dGV.Rows.Count - 1].HeaderCell.Value = header;
+            dGV.Rows[dGV.RowCount - 1].HeaderCell.Value = header;
+        }
+
+        public static string[] getVertexNames(DataGridView dGV)
+        {
+            string[] vNames = new string[dGV.ColumnCount];
+
+            for (int i = 0; i < dGV.ColumnCount; i++)
+            {
+                vNames[i] = dGV.Columns[i].HeaderText;
+            }
+
+            return vNames;
         }
 
         public static int[,] getAdjacancyMatrix(DataGridView dGV)
         {
-            int dim = dGV.Columns.Count;
+            int dim = dGV.ColumnCount;
             int[,] adjMatrix = new int[dim, dim];
             string cellVal;
 
