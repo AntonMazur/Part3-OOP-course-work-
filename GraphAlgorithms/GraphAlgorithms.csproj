@@ -49,9 +49,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Graphs\Ant.cs" />
+    <Compile Include="Graphs\Algorithms\AntColonyAlgorithm\Ant.cs" />
     <Compile Include="Graphs\GraphReaderWriter.cs" />
-    <Compile Include="Graphs\MinHamilCycleFinder.cs" />
     <Compile Include="Graphs\Vertex.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
