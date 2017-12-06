@@ -64,7 +64,7 @@ namespace GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization
     class Ant
     {
         private Tour tour;
-        private static Tour bestTour;
+        private static Nullable<Tour> bestTour;
 
         public Ant(int countOfTowns, int startTown)
         {
@@ -73,7 +73,7 @@ namespace GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization
 
         public void tryAsBest()
         {
-            if (bestTour.getTourLength() > tour.getTourLength())
+            if (bestTour.Value.getTourLength() > tour.getTourLength() || bestTour == null)
             {
                 bestTour = tour;
             }
@@ -91,12 +91,7 @@ namespace GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization
 
         public static int[] getBestTourVisSeq()
         {
-            return bestTour.getVisitedSeq();
+            return bestTour.Value.getVisitedSeq();
         }
-
-
-
-
-
     }
 }

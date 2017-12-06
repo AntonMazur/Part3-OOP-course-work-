@@ -50,6 +50,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Graphs\Algorithms\AntColonyOptimization\Ant.cs" />
+    <Compile Include="Graphs\Algorithms\AntColonyOptimization\Algorithm.cs" />
     <Compile Include="Graphs\Algorithms\AntColonyOptimization\Edge.cs" />
     <Compile Include="Graphs\GraphReaderWriter.cs" />
     <Compile Include="Program.cs" />
