@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data;
+using GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization;
 
 namespace GraphAlgorithms.Graphs
 {
@@ -36,17 +37,24 @@ namespace GraphAlgorithms.Graphs
             dGV.Rows[dGV.RowCount - 1].HeaderCell.Value = header;
         }
 
-        public static string[] getVertexNames(DataGridView dGV)
+        public static string vertSeqToReadableForm(DataGridView dGV, Tour bestTour)
         {
-            string[] vNames = new string[dGV.ColumnCount];
+            int[] vertSeq = bestTour.getVisitedSeq();
 
-            for (int i = 0; i < dGV.ColumnCount; i++)
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < vertSeq.Length; i++)
             {
-                vNames[i] = dGV.Columns[i].HeaderText;
+                sb.Append(dGV.Columns[vertSeq[i]].HeaderText + " - ");
             }
 
-            return vNames;
+            sb.Append(dGV.Columns[vertSeq[0]].HeaderText 
+                + "\nMinimal hamiltone cycle length: " 
+                + bestTour.getTourLength());
+
+            return sb.ToString();
         }
+
 
         public static int[,] getAdjacancyMatrix(DataGridView dGV)
         {

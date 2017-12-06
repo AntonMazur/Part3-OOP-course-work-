@@ -11,8 +11,9 @@ namespace GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization
         private bool[] visitedTowns;
         private int tourLength;
         private int countOfVisitedTowns;
+        private static int townCount;
 
-        public Tour(int townCount, int startTown)
+        public Tour(int startTown)
         {
             visitSeq = new int[townCount];
             visitedTowns = new bool[townCount];
@@ -20,6 +21,16 @@ namespace GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization
             visitedTowns[startTown] = true;
             countOfVisitedTowns = 1;
             tourLength = 0;
+        }
+
+        public static void setCountTown(int townCount)
+        {
+            Tour.townCount = townCount;
+        }
+
+        public int getFirstVisitedTown()
+        {
+            return visitSeq[0];
         }
 
         public int getLastVisitedTown()
@@ -58,6 +69,14 @@ namespace GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization
         {
             return tourLength;
         }
+
+        public void toInitState()
+        {
+            countOfVisitedTowns = 1;
+            tourLength = 0;
+            visitedTowns = new bool[townCount];
+            visitedTowns[visitSeq[0]] = true;
+        }
     }
 
 
@@ -66,17 +85,38 @@ namespace GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization
         private Tour tour;
         private static Nullable<Tour> bestTour;
 
-        public Ant(int countOfTowns, int startTown)
+        public Ant(int startTown)
         {
-            this.tour = new Tour(countOfTowns, startTown);
+            this.tour = new Tour(startTown);
+        }
+
+        public static void setTownCount(int countTown)
+        {
+            bestTour = null;
+            Tour.setCountTown(countTown);
         }
 
         public void tryAsBest()
         {
-            if (bestTour.Value.getTourLength() > tour.getTourLength() || bestTour == null)
+            if (bestTour == null || bestTour.Value.getTourLength() > tour.getTourLength() )
             {
                 bestTour = tour;
             }
+        }
+
+        public void visitTown(int town, int length)
+        {
+            tour.visitTown(town, length);
+        }
+
+        public void visitCycleTown(int length)
+        {
+            tour.visitCycleTown(length);
+        }
+
+        public int getFirstVisitedTown()
+        {
+            return tour.getFirstVisitedTown();
         }
 
         public int getLastVisitedTown()
@@ -84,14 +124,24 @@ namespace GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization
             return tour.getLastVisitedTown();
         }
 
+        public bool isTownVisited(int town)
+        {
+            return tour.isTownVisited(town);
+        }
+
         public bool isAllTownsVisited()
         {
             return tour.isAllTownsVisited();
         }
 
-        public static int[] getBestTourVisSeq()
+        public static Tour getBestTour()
         {
-            return bestTour.Value.getVisitedSeq();
+            return bestTour.Value;
+        }
+
+        public void toInitState()
+        {
+            tour.toInitState();
         }
     }
 }
