@@ -37,9 +37,9 @@ namespace GraphAlgorithms.Graphs
             dGV.Rows[dGV.RowCount - 1].HeaderCell.Value = header;
         }
 
-        public static string vertSeqToReadableForm(DataGridView dGV, Tour bestTour)
+        public static string vertSeqToReadableForm(DataGridView dGV, (int[], int) res)
         {
-            int[] vertSeq = bestTour.getVisitedSeq();
+            int[] vertSeq = res.Item1;
 
             StringBuilder sb = new StringBuilder();
 
@@ -50,7 +50,7 @@ namespace GraphAlgorithms.Graphs
 
             sb.Append(dGV.Columns[vertSeq[0]].HeaderText 
                 + "\nMinimal hamiltone cycle length: " 
-                + bestTour.getTourLength());
+                + res.Item2);
 
             return sb.ToString();
         }

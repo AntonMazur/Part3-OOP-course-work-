@@ -42,7 +42,7 @@ namespace GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization
             edges = allEdges.ToArray();
         }
 
-        public Tour run()
+        public (int[], int) run()
         {
             Ant.setTownCount(countTown);
             Ant[] ants = new Ant[countTown];
@@ -57,7 +57,7 @@ namespace GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization
                 makeOneTour(ants);
             }
 
-            return Ant.getBestTour();
+            return (Ant.getBestTour().getVisitedSeq(), Ant.getBestTour().getTourLength());
         }
 
         private void makeOneTour(Ant[] ants)
