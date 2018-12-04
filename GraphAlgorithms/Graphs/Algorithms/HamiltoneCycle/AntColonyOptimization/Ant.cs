@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization
+namespace GraphAlgorithms.Graphs.Algorithms.HamiltoneCycle.AntColonyOptimization
 {
     struct Tour
     {
@@ -142,6 +142,11 @@ namespace GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization
         public static Tour getBestTour()
         {
             return bestTour.Value;
+        }
+
+        public static int[] getHamiltoneCycle()
+        {
+            return bestTour.Value.getHamiltoneCycle();
         }
 
         public void toInitState()

@@ -55,6 +55,7 @@
     <Compile Include="Graphs\Algorithms\HamiltoneCycle\AntColonyOptimization\Ant.cs" />
     <Compile Include="Graphs\Algorithms\HamiltoneCycle\AntColonyOptimization\Algorithm.cs" />
     <Compile Include="Graphs\Algorithms\HamiltoneCycle\AntColonyOptimization\Edge.cs" />
+    <Compile Include="Graphs\Algorithms\HamiltoneCycle\IMinHamiltoneCycleFinder.cs" />
     <Compile Include="Graphs\Algorithms\HamiltoneCycle\NearestNeighbour\Algorithm.cs" />
     <Compile Include="Graphs\Algorithms\HamiltoneCycle\SimulatedAnnealing\Algorithm.cs" />
     <Compile Include="Graphs\GraphReaderWriter.cs" />

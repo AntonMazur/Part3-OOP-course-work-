@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization
+namespace GraphAlgorithms.Graphs.Algorithms.HamiltoneCycle.AntColonyOptimization
 {
-    class ACOAlgorithm
+    class ACOAlgorithm: IMinHamiltoneCycleFinder
     {
         private int countTown;
         private int[,] adjMatrix;
@@ -42,7 +42,7 @@ namespace GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization
             edges = allEdges.ToArray();
         }
 
-        public (int[], int) run()
+        public (int[], int) findHamiltoneCycle()
         {
             Ant.setTownCount(countTown);
             Ant[] ants = new Ant[countTown];
@@ -57,7 +57,7 @@ namespace GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization
                 makeOneTour(ants);
             }
 
-            return (Ant.getBestTour().getVisitedSeq(), Ant.getBestTour().getTourLength());
+            return (Ant.getHamiltoneCycle(), Ant.getBestTour().getTourLength());
         }
 
         private void makeOneTour(Ant[] ants)

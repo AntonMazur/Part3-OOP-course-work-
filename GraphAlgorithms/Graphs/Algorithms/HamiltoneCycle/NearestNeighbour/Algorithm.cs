@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GraphAlgorithms.Graphs.Algorithms.HamiltoneCycle.NearestNeighbour
 {
-    class Algorithm
+    class Algorithm: IMinHamiltoneCycleFinder
     {
         int[,] adjMatrix;
         int[] bestDecision;
@@ -17,7 +17,7 @@ namespace GraphAlgorithms.Graphs.Algorithms.HamiltoneCycle.NearestNeighbour
             this.vertexCount = adjMatrix.GetLength(0);
         }
 
-        public (int[], int) getHamiltoneCycle()
+        public (int[], int) findHamiltoneCycle()
         {
             var hamiloneCycle = new int[vertexCount];
             
@@ -43,6 +43,7 @@ namespace GraphAlgorithms.Graphs.Algorithms.HamiltoneCycle.NearestNeighbour
 
                 if (visited.Count == vertexCount && adjMatrix[visited.Last(), visited.First()] != -1)
                 {
+                    visited.AddLast(visited.First());
                     bestDecision = bestDecision == null || getPathLength(bestDecision) > getPathLength(visited.ToArray()) ? visited.ToArray() : bestDecision;
                 }
                 else

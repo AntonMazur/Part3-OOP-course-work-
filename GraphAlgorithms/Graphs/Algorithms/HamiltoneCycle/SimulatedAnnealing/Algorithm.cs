@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GraphAlgorithms.Graphs.Algorithms.SimulatedAnnealing
+namespace GraphAlgorithms.Graphs.Algorithms.HamiltoneCycle.SimulatedAnnealing
 {
-    class Algorithm
+    class Algorithm: IMinHamiltoneCycleFinder
     {
-        private static Random randomizer;
+        private static Random randomizer = new Random();
         double startTemperature;
         double tempDecreasingDelta;
         int[,] adjMatrix;
@@ -15,10 +15,14 @@ namespace GraphAlgorithms.Graphs.Algorithms.SimulatedAnnealing
         int iterationCount;
         int vertexCount;
 
-        public Algorithm(int[,] adjMatrix, int[] someDecision, int iterationCount)
+        public Algorithm(int[,] adjMatrix, double startTemperature, double tempDecreasingDelta, int[] someDecision, int iterationCount)
         {
             this.adjMatrix = adjMatrix;
+            this.startTemperature = startTemperature;
+            this.tempDecreasingDelta = tempDecreasingDelta;
+            this.iterationCount = iterationCount;
             this.vertexCount = adjMatrix.GetLength(0);
+            this.bestDecision = someDecision;
         }
 
         private int[] getAdjacentVertexes(int vertexIdx)
@@ -36,7 +40,7 @@ namespace GraphAlgorithms.Graphs.Algorithms.SimulatedAnnealing
             return adjVertexes.ToArray();
         }
 
-        public (int[], int) getHamiltoneCycle()
+        public (int[], int) findHamiltoneCycle()
         {
 
             for (int i = 0; i < iterationCount; i++)
@@ -66,7 +70,7 @@ namespace GraphAlgorithms.Graphs.Algorithms.SimulatedAnnealing
                         bestDecision = newCycle;
                     }
 
-                    temp -= tempDecreasingDelta;
+                    temp *= tempDecreasingDelta;
                 } while (diff < 0 || prob > randomizer.NextDouble() * startTemperature);
             }
 
@@ -91,7 +95,7 @@ namespace GraphAlgorithms.Graphs.Algorithms.SimulatedAnnealing
             int[] newCycle;
             int rand1;
             int rand2;
-
+            int maxIter = 1000;
             do
             {
                 newCycle = (int[])cycle.Clone();
@@ -103,7 +107,7 @@ namespace GraphAlgorithms.Graphs.Algorithms.SimulatedAnnealing
                 newCycle[rand1 + 1] = cycle[rand2 + 1];
                 newCycle[rand2 + 1] = cycle[rand1 + 1];
 
-            } while (!checkIntegrityAt(newCycle, rand1) || checkIntegrityAt(newCycle, rand2));
+            } while ((!checkIntegrityAt(newCycle, rand1 + 1) || !checkIntegrityAt(newCycle, rand2 + 1)) && --maxIter > 0);
 
             return newCycle;
         }

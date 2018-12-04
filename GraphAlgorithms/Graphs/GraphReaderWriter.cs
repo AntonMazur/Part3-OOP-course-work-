@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data;
-using GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization;
 
 namespace GraphAlgorithms.Graphs
 {
@@ -39,13 +38,13 @@ namespace GraphAlgorithms.Graphs
 
         public static string vertSeqToReadableForm(DataGridView dGV, (int[], int) res)
         {
-            int[] vertSeq = res.Item1;
+            var vertSeq = res.Item1.Select(vIdx =>(string) dGV.Rows[vIdx].HeaderCell.Value);
 
             StringBuilder sb = new StringBuilder();
 
             sb.Append(String.Join("-", vertSeq));
 
-            sb.Append("\nMinimal hamiltone cycle length: " 
+            sb.Append("\nДлина минимального гамильтонового цикла: " 
                 + res.Item2);
 
             return sb.ToString();
@@ -72,6 +71,33 @@ namespace GraphAlgorithms.Graphs
                 }
             }
             return adjMatrix;
+        }
+
+        public static int[] convertPath(string path, DataGridView dGV)
+        {
+            var rowNames = new string[dGV.Rows.Count];
+
+            for (int i = 0; i < rowNames.Length; i++)
+            {
+                rowNames[i] = (string) dGV.Rows[i].HeaderCell.Value;
+            }
+
+            return path.Split('-').Select(strComp => convertPathComponent(strComp, rowNames)).ToArray();
+        }
+
+        private static int convertPathComponent(string comp, string[] rowNames)
+        {
+            int compIdx = -1;
+
+            for (int i = 0; i < rowNames.Length; i++)
+            {
+                if (rowNames[i].Equals(comp))
+                {
+                    return i;
+                }
+            }
+
+            return compIdx;
         }
 
         public static void loadExample(DataGridView dGV)
