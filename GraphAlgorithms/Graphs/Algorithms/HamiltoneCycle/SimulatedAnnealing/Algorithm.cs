@@ -8,7 +8,7 @@ namespace GraphAlgorithms.Graphs.Algorithms.SimulatedAnnealing
     class Algorithm
     {
         private static Random randomizer;
-        int startTemperature;
+        double startTemperature;
         double tempDecreasingDelta;
         int[,] adjMatrix;
         int[] bestDecision;
@@ -17,7 +17,8 @@ namespace GraphAlgorithms.Graphs.Algorithms.SimulatedAnnealing
 
         public Algorithm(int[,] adjMatrix, int[] someDecision, int iterationCount)
         {
-            this.vertexCount = 0;
+            this.adjMatrix = adjMatrix;
+            this.vertexCount = adjMatrix.GetLength(0);
         }
 
         private int[] getAdjacentVertexes(int vertexIdx)
@@ -35,15 +36,13 @@ namespace GraphAlgorithms.Graphs.Algorithms.SimulatedAnnealing
             return adjVertexes.ToArray();
         }
 
-        private (int[], int) getHamiltoneCycle()
+        public (int[], int) getHamiltoneCycle()
         {
-            var hamiloneCycle = new int[vertexCount];
-            var temp = startTemperature;
 
             for (int i = 0; i < iterationCount; i++)
             {
                 var newCycle = (int[])bestDecision.Clone();
-                temp -= (int) Math.Round(i * tempDecreasingDelta);
+                var temp = startTemperature;
                 int[] cycle;
                 int oldLen;
                 int newLen;
@@ -66,6 +65,8 @@ namespace GraphAlgorithms.Graphs.Algorithms.SimulatedAnnealing
                     {
                         bestDecision = newCycle;
                     }
+
+                    temp -= tempDecreasingDelta;
                 } while (diff < 0 || prob > randomizer.NextDouble() * startTemperature);
             }
 

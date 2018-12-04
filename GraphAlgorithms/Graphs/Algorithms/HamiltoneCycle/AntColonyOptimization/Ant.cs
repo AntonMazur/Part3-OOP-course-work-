@@ -65,6 +65,11 @@ namespace GraphAlgorithms.Graphs.Algorithms.AntColonyOptimization
             return (int[])visitSeq.Clone();
         }
 
+        public int[] getHamiltoneCycle()
+        {
+            return visitSeq.Concat(new int[] { visitSeq[0] }).ToArray();
+        }
+
         public int getTourLength()
         {
             return tourLength;

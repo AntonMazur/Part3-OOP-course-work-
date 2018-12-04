@@ -43,13 +43,9 @@ namespace GraphAlgorithms.Graphs
 
             StringBuilder sb = new StringBuilder();
 
-            for (int i = 0; i < vertSeq.Length; i++)
-            {
-                sb.Append(dGV.Columns[vertSeq[i]].HeaderText + " - ");
-            }
+            sb.Append(String.Join("-", vertSeq));
 
-            sb.Append(dGV.Columns[vertSeq[0]].HeaderText 
-                + "\nMinimal hamiltone cycle length: " 
+            sb.Append("\nMinimal hamiltone cycle length: " 
                 + res.Item2);
 
             return sb.ToString();
